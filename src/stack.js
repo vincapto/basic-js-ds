@@ -13,22 +13,54 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 class Stack {
-  push(/* element */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  list = [];
+  push(element) {
+    this.list.push(element);
+    console.log(this.list, this.list.at(-1));
   }
 
   pop() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    // else return this.list.at(-1);
+    console.log('AT -1', [...this.list].pop());
+    return this.list.pop();
   }
 
   peek() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    // console.log('peek', this.list[this.list.length - 1]);
+    return this.list.at(-1);
+  }
+
+  enqueue(element) {
+    this.elements = this.elements.hasOwnProperty('next')
+      ? { value: element, next: this.elements }
+      : { value: element, next: null };
+    console.log(this.elements);
+  }
+  dequeue() {
+    console.log(this.elements);
+    this.goDeep(this.elements);
+    console.log(this.deleted);
+    return this.deleted;
+  }
+
+  getElements() {
+    console.log('DELETED', this.deleted);
+    return this.elements;
+  }
+
+  goDeep(obj) {
+    if (obj.next) {
+      if (obj.next.next !== null) {
+        // console.log('deep', obj.next);
+        this.goDeep(obj.next);
+      } else {
+        this.deleted = obj.next.value;
+        obj.next = null;
+      }
+    }
   }
 }
 
 module.exports = {
-  Stack
+  Stack,
 };
